@@ -4,7 +4,7 @@ import org.springframework.stereotype.service;
 
 import com.example.demo.service.StudentsService0
 
-@service
+@Service
 public class StudentServiceImp{
     .
 }
