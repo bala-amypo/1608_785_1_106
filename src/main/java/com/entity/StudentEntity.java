@@ -11,5 +11,5 @@ public class SampleEntity{
     private String name;
     private String email;
     private String password;
-    private Date created;+
+    private Date created;
 }
