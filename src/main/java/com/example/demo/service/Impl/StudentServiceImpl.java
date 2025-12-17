@@ -5,6 +5,7 @@ import org.springframework.stereotype.service;
 import com.example.demo.service.StudentsService0
 
 @Service
-public class StudentServiceImp{
-    .
+public class StudentServiceImp implements StudentService {
+    @Autowired StudentRepository student'
+    
 }
