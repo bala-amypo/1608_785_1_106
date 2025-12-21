@@ -2,6 +2,7 @@ package com.example.demo.entity;
 
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "sensor_readings")
@@ -11,12 +12,16 @@ public class SensorReading {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    private Sensor sensor;
-
     private Double readingValue;
     private LocalDateTime readingTime;
     private String status;
+
+    @ManyToOne
+    @JoinColumn(name = "sensor_id")
+    private Sensor sensor;
+
+    @OneToMany(mappedBy = "sensorReading")
+    private List<ComplianceLog> logs;
 
     public SensorReading() {}
 
@@ -27,11 +32,5 @@ public class SensorReading {
         this.readingTime = readingTime;
         this.status = status;
     }
-
-    public Long getId() { return id; }
-    public Double getReadingValue() { return readingValue; }
-    public LocalDateTime getReadingTime() { return readingTime; }
-
-    public void setSensor(Sensor sensor) { this.sensor = sensor; }
-    public void setStatus(String status) { this.status = status; }
+    // getters & setters
 }

@@ -11,15 +11,17 @@ public class ComplianceLog {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    private SensorReading sensorReading;
-
-    @ManyToOne
-    private ComplianceThreshold thresholdUsed;
-
     private String statusAssigned;
     private String remarks;
     private LocalDateTime loggedAt;
+
+    @ManyToOne
+    @JoinColumn(name = "reading_id")
+    private SensorReading sensorReading;
+
+    @ManyToOne
+    @JoinColumn(name = "threshold_id")
+    private ComplianceThreshold thresholdUsed;
 
     public ComplianceLog() {}
 
@@ -34,6 +36,5 @@ public class ComplianceLog {
         this.remarks = remarks;
         this.loggedAt = loggedAt;
     }
-
-    public Long getId() { return id; }
+    // getters & setters
 }
