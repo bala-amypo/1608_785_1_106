@@ -2,12 +2,9 @@ package com.example.demo.controller;
 
 import com.example.demo.entity.Location;
 import com.example.demo.service.LocationService;
-import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
-@RequestMapping("/locations")
 public class LocationController {
 
     private final LocationService locationService;
@@ -16,20 +13,17 @@ public class LocationController {
         this.locationService = locationService;
     }
 
-    // POST → create
-    @PostMapping
-    public Location create(@RequestBody Location location) {
+    // POST
+    public Location create(Location location) {
         return locationService.createLocation(location);
     }
 
-    // GET → get by id
-    @GetMapping("/{id}")
-    public Location get(@PathVariable Long id) {
+    // GET by id
+    public Location getById(Long id) {
         return locationService.getLocation(id);
     }
 
-    // GET → get all
-    @GetMapping
+    // GET all
     public List<Location> getAll() {
         return locationService.getAllLocations();
     }
