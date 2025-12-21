@@ -5,29 +5,27 @@ import com.example.demo.exception.ResourceNotFoundException;
 import com.example.demo.repository.LocationRepository;
 import com.example.demo.service.LocationService;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 public class LocationServiceImpl implements LocationService {
 
-    private final LocationRepository locationRepository;
+    private final LocationRepository repository;
 
-    public LocationServiceImpl(LocationRepository locationRepository) {
-        this.locationRepository = locationRepository;
+    public LocationServiceImpl(LocationRepository repository) {
+        this.repository = repository;
     }
 
     @Override
-    public Location createLocation(Location location) {
-        if (location.getRegion() == null || location.getRegion().isEmpty()) {
-            throw new IllegalArgumentException("region required");
+    public Location create(Location location) {
+        if (location.getName() == null || location.getName().isEmpty()) {
+            throw new IllegalArgumentException("Name required");
         }
-        location.setCreatedAt(LocalDateTime.now());
-        return locationRepository.save(location);
+        return repository.save(location);
     }
 
     @Override
-    public Location getLocation(Long id) {
-        Location loc = locationRepository.findById(id);
+    public Location get(int id) {
+        Location loc = repository.findById(id);
         if (loc == null) {
             throw new ResourceNotFoundException("Location not found");
         }
@@ -35,7 +33,12 @@ public class LocationServiceImpl implements LocationService {
     }
 
     @Override
-    public List<Location> getAllLocations() {
-        return locationRepository.findAll();
+    public List<Location> getAll() {
+        return repository.findAll();
+    }
+
+    @Override
+    public void delete(int id) {
+        repository.deleteById(id);
     }
 }

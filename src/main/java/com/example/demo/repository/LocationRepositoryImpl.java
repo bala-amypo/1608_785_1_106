@@ -6,28 +6,31 @@ import java.util.List;
 
 public class LocationRepositoryImpl implements LocationRepository {
 
-    private List<Location> db = new ArrayList<>();
-    private long idCounter = 1;
+    private final List<Location> db = new ArrayList<>();
+    private int idCounter = 1;
 
     @Override
-    public Location save(Location location) {
+    public synchronized Location save(Location location) {
         location.setId(idCounter++);
         db.add(location);
         return location;
     }
 
     @Override
-    public Location findById(Long id) {
+    public synchronized Location findById(int id) {
         for (Location l : db) {
-            if (l.getId().equals(id)) {
-                return l;
-            }
+            if (l.getId() == id) return l;
         }
         return null;
     }
 
     @Override
-    public List<Location> findAll() {
+    public synchronized List<Location> findAll() {
         return db;
+    }
+
+    @Override
+    public synchronized void deleteById(int id) {
+        db.removeIf(l -> l.getId() == id);
     }
 }

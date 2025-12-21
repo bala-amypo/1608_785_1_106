@@ -7,24 +7,26 @@ import java.util.List;
 
 public class LocationController {
 
-    private final LocationService locationService;
+    private final LocationService service;
 
-    public LocationController(LocationService locationService) {
-        this.locationService = locationService;
+    public LocationController(LocationService service) {
+        this.service = service;
     }
 
-    // POST
     public Location create(Location location) {
-        return locationService.createLocation(location);
+        return service.create(location);
     }
 
-    // GET by id
-    public Location getById(Long id) {
-        return locationService.getLocation(id);
+    public Location getById(int id) {
+        return service.get(id);
     }
 
-    // GET all
     public List<Location> getAll() {
-        return locationService.getAllLocations();
+        return service.getAll();
+    }
+
+    public String delete(int id) {
+        service.delete(id);
+        return "Deleted successfully";
     }
 }
