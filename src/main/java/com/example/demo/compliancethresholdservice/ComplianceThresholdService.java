@@ -1,11 +1,31 @@
-package com.example.demo.service;
+@Entity
+public class ComplianceThreshold {
 
-import com.example.demo.entity.ComplianceThreshold;
-import java.util.List;
+    private Double minValue;
+    private Double maxValue;
+    private String severityLevel;
 
-public interface ComplianceThresholdService {
-    ComplianceThreshold createThreshold(ComplianceThreshold threshold);
-    ComplianceThreshold getThreshold(Long id);
-    ComplianceThreshold getThresholdBySensorType(String sensorType);
-    List<ComplianceThreshold> getAllThresholds();
+    public Double getMinValue() {
+        return minValue;
+    }
+
+    public void setMinValue(Double minValue) {
+        this.minValue = minValue;
+    }
+
+    public Double getMaxValue() {
+        return maxValue;
+    }
+
+    public void setMaxValue(Double maxValue) {
+        this.maxValue = maxValue;
+    }
+
+    public String getSeverityLevel() {
+        return severityLevel;
+    }
+
+    public void setSeverityLevel(String severityLevel) {
+        this.severityLevel = severityLevel;
+    }
 }
