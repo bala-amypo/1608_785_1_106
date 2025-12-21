@@ -11,12 +11,12 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import java.io.IOException;
 import java.util.List;
 
-public class JwtAuthenticationFilter extends OncePerRequestFilter {
+public class JwAuthenticationFilter extends OncePerRequestFilter {
 
-    private final JwtTokenProvider jwtTokenProvider;
+    private final JwTokenProvider jwokenProvider;
 
-    public JwtAuthenticationFilter(JwtTokenProvider jwtTokenProvider) {
-        this.jwtTokenProvider = jwtTokenProvider;
+    public JwAuthenticationFilter(JwokenProvider jwtokenProvider) {
+        this.jwTokenProvider = jwokenProvider;
     }
 
     protected void doFilterInternal(HttpServletRequest request,
@@ -29,8 +29,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         if (header != null && header.startsWith("Bearer ")) {
             String token = header.substring(7);
             try {
-                String email = jwtTokenProvider.extractEmail(token);
-                String role = jwtTokenProvider.extractRole(token);
+                String email = jwTokenProvider.extractEmail(token);
+                String role = jwTokenProvider.extractRole(token);
 
                 UsernamePasswordAuthenticationToken auth =
                         new UsernamePasswordAuthenticationToken(

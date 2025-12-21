@@ -3,7 +3,7 @@ package com.example.demo.security;
 import io.jsonwebtoken.*;
 import java.util.Date;
 
-public class JwtTokenProvider {
+public class JwTokenProvider {
 
     private final String secretKey;
     private final long expirationMillis;
