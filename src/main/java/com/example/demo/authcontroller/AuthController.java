@@ -3,9 +3,7 @@ package com.example.demo.controller;
 import com.example.demo.dto.AuthRequest;
 import com.example.demo.dto.AuthResponse;
 import com.example.demo.entity.User;
-import com.example.demo.security.JwtTokenProvider;
 import com.example.demo.service.UserService;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -13,20 +11,13 @@ import org.springframework.web.bind.annotation.*;
 public class AuthController {
 
     private final UserService userService;
-    private final JwtTokenProvider jwtTokenProvider;
-    private final PasswordEncoder passwordEncoder;
 
-    public AuthController(UserService userService,
-                          JwtTokenProvider jwtTokenProvider,
-                          PasswordEncoder passwordEncoder) {
+    public AuthController(UserService userService) {
         this.userService = userService;
-        this.jwtTokenProvider = jwtTokenProvider;
-        this.passwordEncoder = passwordEncoder;
     }
 
     @PostMapping("/register")
     public User register(@RequestBody User user) {
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
         return userService.register(user);
     }
 
@@ -35,19 +26,12 @@ public class AuthController {
 
         User user = userService.findByEmail(request.getEmail());
 
-        if (!passwordEncoder.matches(
-                request.getPassword(), user.getPassword())) {
+        if (!user.getPassword().equals(request.getPassword())) {
             throw new RuntimeException("Invalid credentials");
         }
 
-        String token = jwtTokenProvider.generateToken(
-                user.getId(),
-                user.getEmail(),
-                user.getRole()
-        );
-
         return new AuthResponse(
-                token,
+                "DUMMY_TOKEN",
                 user.getId(),
                 user.getEmail(),
                 user.getRole()
