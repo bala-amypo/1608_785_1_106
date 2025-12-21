@@ -4,7 +4,7 @@ import com.example.demo.entity.Sensor;
 import com.example.demo.service.SensorService;
 import org.springframework.web.bind.annotation.*;
 
-import org.springframework.web
+import com.example.demo.sensorecontroller.SensorController;
 import java.util.List;
 
 @RestController
