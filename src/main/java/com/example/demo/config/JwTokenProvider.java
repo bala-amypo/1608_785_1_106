@@ -8,13 +8,13 @@ public class JwTokenProvider {
     private final String secretKey;
     private final long expirationMillis;
 
-    public JwtTokenProvider(String secretKey, long expirationMillis) {
+    public JwTokenProvider(String secretKey, long expirationMillis) {
         this.secretKey = secretKey;
         this.expirationMillis = expirationMillis;
     }
 
     public String generateToken(Long userId, String email, String role) {
-        return Jwts.builder()
+        return Jws.builder()
                 .setSubject(email)
                 .claim("userId", userId)
                 .claim("email", email)
