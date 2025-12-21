@@ -1,11 +1,11 @@
-package com.example.demo.service;
+// package com.example.demo.service;
 
-import com.example.demo.entity.Sensor;
-import java.util.List;
+// import com.example.demo.entity.Sensor;
+// import java.util.List;
 
-public interface SensorService {
+// public interface SensorService {
 
-    Sensor createSensor(Sensor sensor);
-    Sensor getSensor(Long id);
-    List<Sensor> getAllSensors();
-}
+//     Sensor createSensor(Sensor sensor);
+//     Sensor getSensor(Long id);
+//     List<Sensor> getAllSensors();
+// }
