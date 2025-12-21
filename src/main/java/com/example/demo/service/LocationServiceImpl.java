@@ -16,15 +16,15 @@ public class LocationServiceImpl implements LocationService {
     }
 
     public Location createLocation(Location location) {
-        if (location.getRegion() == null || location.getRegion().isEmpty()) {
-            throw new IllegalArgumentException("region required");
-        }
         return locationRepository.save(location);
     }
 
     public Location getLocation(Long id) {
-        return locationRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Location not found"));
+        Location location = locationRepository.findById(id);
+        if (location == null) {
+            throw new ResourceNotFoundException("Location not found");
+        }
+        return location;
     }
 
     public List<Location> getAllLocations() {
