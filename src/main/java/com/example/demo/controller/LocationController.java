@@ -2,12 +2,9 @@ package com.example.demo.controller;
 
 import com.example.demo.entity.Location;
 import com.example.demo.service.LocationService;
-import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
-@RequestMapping("/api/locations")
 public class LocationController {
 
     private final LocationService service;
@@ -16,29 +13,20 @@ public class LocationController {
         this.service = service;
     }
 
-    @PostMapping
-    public Location create(@RequestBody Location location) {
+    public Location create(Location location) {
         return service.create(location);
     }
 
-    @GetMapping
+    public Location getById(int id) {
+        return service.get(id);
+    }
+
     public List<Location> getAll() {
         return service.getAll();
     }
 
-    @GetMapping("/{id}")
-    public Location getById(@PathVariable Long id) {
-        return service.getById(id);
-    }
-
-    @PutMapping("/{id}")
-    public Location update(@PathVariable Long id, @RequestBody Location location) {
-        return service.update(id, location);
-    }
-
-    @DeleteMapping("/{id}")
-    public String delete(@PathVariable Long id) {
+    public String delete(int id) {
         service.delete(id);
-        return "Location deleted successfully";
+        return "Deleted successfully";
     }
 }
