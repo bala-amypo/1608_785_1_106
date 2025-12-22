@@ -5,7 +5,9 @@ import com.example.demo.service.LocationService;
 
 import java.util.List;
 
-public class LocationController {
+@RestController
+@RequestMapping("/api/locations")
+    public class LocationController {
 
     private final LocationService service;
 
