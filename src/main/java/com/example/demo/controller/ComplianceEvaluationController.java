@@ -1,0 +1,20 @@
+package com.example.demo.controller;
+
+import com.example.demo.entity.ComplianceLog;
+import com.example.demo.service.ComplianceEvaluationService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@RequestMapping("/api/compliance")
+public class ComplianceEvaluationController {
+
+    @Autowired
+    private ComplianceEvaluationService evaluationService;
+
+    @PostMapping("/evaluate/{readingId}")
+    public ResponseEntity<ComplianceLog> evaluateReading(@PathVariable Long readingId) {
+        return ResponseEntity.ok(evaluationService.evaluateReading(readingId));
+    }
+}
