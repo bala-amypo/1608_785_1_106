@@ -2,31 +2,31 @@ package com.example.demo.controller;
 
 import com.example.demo.entity.Location;
 import com.example.demo.service.LocationService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@RestController
+@RequestMapping("/api/locations")
 public class LocationController {
 
-    private final LocationService service;
+    @Autowired
+    private LocationService locationService;
 
-    public LocationController(LocationService service) {
-        this.service = service;
+    @PostMapping
+    public ResponseEntity<Location> createLocation(@RequestBody Location location) {
+        return ResponseEntity.ok(locationService.createLocation(location));
     }
 
-    public Location create(Location location) {
-        return service.create(location);
+    @GetMapping("/{id}")
+    public ResponseEntity<Location> getLocation(@PathVariable Long id) {
+        return ResponseEntity.ok(locationService.getLocation(id));
     }
 
-    public Location getById(int id) {
-        return service.get(id);
-    }
-
-    public List<Location> getAll() {
-        return service.getAll();
-    }
-
-    public String delete(int id) {
-        service.delete(id);
-        return "Deleted successfully";
+    @GetMapping
+    public ResponseEntity<List<Location>> getAllLocations() {
+        return ResponseEntity.ok(locationService.getAllLocations());
     }
 }
